@@ -1,7 +1,7 @@
 const faker = require("faker");
 const {
   db,
-  models: { User },
+  models: { User, Product },
 } = require("../server/db/index.js");
 
 const seed = async () => {
