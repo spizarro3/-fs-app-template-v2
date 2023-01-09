@@ -24,9 +24,7 @@ const Product = db.define('product', {
     },
     quantity: {
         type: Sequelize.INTEGER,
-        defaultValue : (~Math.random() * 100)
     }
-
 })
 
 module.exports = Product
