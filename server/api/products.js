@@ -1,12 +1,12 @@
 const router = require("express").Router();
 module.exports = router;
 
-const { Product, Cart } = require("../db");
+const { models: {Product, Cart} } = require("../db");
 
 // All products route
 router.get("/", async (req, res, next) => {
   try {
-    const products = await Product.findAll({ include: Cart });
+    const products = await Product.findAll();
     res.send(products);
   } catch (error) {
     console.log("Error in all products route");
