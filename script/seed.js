@@ -1,7 +1,7 @@
 const faker = require("faker");
 const {
   db,
-  models: { User, Product },
+  models: { User, Product, Cart },
 } = require("../server/db/index.js");
 
 const seed = async () => {
@@ -12,6 +12,7 @@ const seed = async () => {
       username: faker.internet.userName(),
       password: faker.internet.password(),
     });
+    Cart.create();
   }
   for (let i = 0; i <= 100; i++) {
     await Product.create({
@@ -21,7 +22,7 @@ const seed = async () => {
       imageUrl: faker.image.imageUrl(),  
       quantity : Math.floor(Math.random() * 100)    
     });
-  }
+};
 };
 
 async function runSeed() {
