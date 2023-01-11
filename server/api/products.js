@@ -19,7 +19,7 @@ router.get("/", async (req, res, next) => {
 // Single product route
 router.get("/:productId", async (req, res, next) => {
   try {
-    const product = await Product.findByPk(req.params.productId, {});
+    const product = await Product.findByPk(req.params.productId);
     res.send(product);
   } catch (error) {
     console.log("error in single product route");
@@ -53,8 +53,7 @@ router.put("/:productId", async (req, res, next) => {
 router.delete("/:productId", async (req, res, next) => {
   try {
     const product = await Product.findByPk(req.params.productId);
-    await product.destroy();
-    res.send(product);
+    res.send( await product.destroy());
   } catch (error) {
     console.log("Error in delete product route");
     next(error);
