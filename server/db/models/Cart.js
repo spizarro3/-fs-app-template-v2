@@ -3,12 +3,11 @@ const db = require('../db')
 
 
 const Cart = db.define('cart', {
-  id : {
+  userId: {
     type: Sequelize.INTEGER,
-    primaryKey: true,
-    autoIncrement: true,
+    allowNull: false,
+    unique: true
   },
-  
   totalQuantity: { 
     type: Sequelize.INTEGER,
     defaultValue: 0,

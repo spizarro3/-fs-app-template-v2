@@ -8,6 +8,7 @@ const Cart = require ('./models/Cart')
 
 Cart.belongsTo(User)
 Cart.hasMany(Product)
+User.hasOne(Cart)
 
 module.exports = {
   db,

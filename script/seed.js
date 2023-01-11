@@ -8,11 +8,11 @@ const seed = async () => {
   await db.sync({ force: true });
   console.log("db synced!");
   for (let i = 0; i <= 100; i++) {
-    await User.create({
+    const newUser = await User.create({
       username: faker.internet.userName(),
       password: faker.internet.password(),
     });
-    Cart.create();
+    Cart.create({userId : newUser.id});
   }
   for (let i = 0; i <= 100; i++) {
     await Product.create({
