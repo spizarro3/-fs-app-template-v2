@@ -31,3 +31,13 @@ router.get('/:userId/cart', async (req, res, next) => {
     next(err)
   }
 })
+
+router.delete("/:userId", async (req, res, next) => {
+  try {
+    const user = await User.findByPk(req.params.userId);
+    res.send( await user.destroy());
+  } catch (error) {
+    console.log("Error in delete user route");
+    next(error);
+  }
+});
