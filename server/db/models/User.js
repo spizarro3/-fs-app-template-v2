@@ -22,6 +22,10 @@ const User = db.define("user", {
   },
 });
 
+User.prototype.isAdmin = function () {
+  return this.isAdmin;
+};
+
 module.exports = User;
 
 /**
