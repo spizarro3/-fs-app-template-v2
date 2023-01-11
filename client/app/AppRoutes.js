@@ -1,3 +1,4 @@
+
 import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { Route, Routes } from 'react-router-dom';
@@ -6,6 +7,8 @@ import Home from '../features/home/Home';
 import AllProducts from '../features/allproducts/AllProducts';
 import { me } from './store';
 import AllProductsAdmin from '../features/allproducts/AllProductsAdmin';
+import SingleProduct from "../features/singleProduct/SingleProduct";
+
 
 /**
  * COMPONENT
@@ -40,12 +43,15 @@ const AppRoutes = () => {
             path="/signup"
             element={<AuthForm name="signup" displayName="Sign Up" />}
           />
+
           <Route
           path="/products"
           element={<AllProducts />} />
           <Route
           path="/admin/products"
           element={<AllProductsAdmin />} />
+          <Route path="/products/:id" element={<SingleProduct />} />
+
         </Routes>
         
       )}
