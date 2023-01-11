@@ -4,6 +4,8 @@ import { Link } from "react-router-dom"
 import { selectProducts } from "../allproducts/productsSlice";
 import { fetchProductsAsync } from "../allproducts/productsSlice";
 import { deleteSingleProductAsync } from "../allproducts/productsSlice";
+import AddProduct from "../allproducts/AddProduct";
+
 
 
 
@@ -13,17 +15,17 @@ const AllProductsAdmin = () => {
   const dispatch = useDispatch()
 
   const handleDelete = (productId) => {
-    dispatch(deleteSingleProductAsync(productId))
+    dispatch(deleteSingleProductAsync(productId)).then(()=>dispatch(fetchProductsAsync()))
+  
   }
-
 
   useEffect(() => {
     dispatch(fetchProductsAsync());
-  }, [dispatch]);
+  },[dispatch]);
 
   return (
     <div id="allProducts">
-    
+    <AddProduct />
       <ul>
         {products.map((product) => (
           <li>

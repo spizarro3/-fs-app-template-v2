@@ -1,7 +1,7 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 
-const initialState = [];
+
 
 export const fetchProductsAsync = createAsyncThunk("allProducts", async () => {
       const { data } = await axios.get(`/api/products`);
@@ -15,13 +15,13 @@ export const fetchProductsAsync = createAsyncThunk("allProducts", async () => {
       });
 
       export const deleteSingleProductAsync = createAsyncThunk("deleteSingleProduct", async (id) => {
-        const { data } = await axios.delete(`/api/products/${id}`);
-        return data;
+         await axios.delete(`/api/products/${id}`);
+        return id;
       })
 
   const productSlice = createSlice({
     name: "products",
-    initialState,
+    initialState: [],
     reducers: {},
     extraReducers: (builder) => {
       builder.addCase(fetchProductsAsync.fulfilled, (state, action) => {
@@ -30,6 +30,13 @@ export const fetchProductsAsync = createAsyncThunk("allProducts", async () => {
       builder.addCase(addProductAsync.fulfilled, (state, action) => {
         state.push(action.payload);
       });
+      builder.addCase(deleteSingleProductAsync.fulfilled, (state, action) => {
+        state = state.filter(product =>{
+          return product.id !== action.payload
+        }); 
+      });
+      
+
     },
   });
 
