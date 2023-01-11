@@ -1,7 +1,9 @@
 const router = require("express").Router();
 module.exports = router;
 
-const { models: {Product, Cart} } = require("../db");
+const {
+  models: { Product, Cart },
+} = require("../db");
 
 // All products route
 router.get("/", async (req, res, next) => {
@@ -17,9 +19,7 @@ router.get("/", async (req, res, next) => {
 // Single product route
 router.get("/:productId", async (req, res, next) => {
   try {
-    const product = await Product.findByPk(req.params.productId, {
-      include: Cart,
-    });
+    const product = await Product.findByPk(req.params.productId, {});
     res.send(product);
   } catch (error) {
     console.log("error in single product route");
@@ -50,7 +50,7 @@ router.put("/:productId", async (req, res, next) => {
 });
 
 // Delete product route
-router.delete(":productId", async (req, res, next) => {
+router.delete("/:productId", async (req, res, next) => {
   try {
     const product = await Product.findByPk(req.params.productId);
     await product.destroy();
