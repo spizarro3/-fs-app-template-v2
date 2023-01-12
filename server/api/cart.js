@@ -13,3 +13,13 @@ router.get("/", async (req, res, next) => {
     next(error);
   }
 });
+
+router.delete("/:cartId", async (req, res, next) => {
+  try {
+    const cart = await Cart.findByPk(req.params.cartId);
+    res.send( await cart.destroy());
+  } catch (error) {
+    console.log("Error in delete cart route");
+    next(error);
+  }
+});
