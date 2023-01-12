@@ -9,6 +9,7 @@ import { me } from './store';
 import AllProductsAdmin from '../features/allproducts/AllProductsAdmin';
 import SingleProduct from "../features/singleProduct/SingleProduct";
 import AllUsersAdmin from '../features/usersadmin/AllUsers';
+import SingleUser from '../features/usersadmin/SingleUser';
 
 
 /**
@@ -28,7 +29,14 @@ const AppRoutes = () => {
       {isLoggedIn ? (
         <Routes>
           <Route path="/*" element={<Home />} />
+
           <Route to="/home" element={<Home />} />
+
+          <Route
+          path="/users/:id"
+          element={<SingleUser />} />
+
+
         </Routes>
       ) : (
         <Routes>
@@ -48,6 +56,7 @@ const AppRoutes = () => {
           <Route
           path="/products"
           element={<AllProducts />} />
+
           <Route
           path="/admin/products"
           element={<AllProductsAdmin />} />
@@ -56,6 +65,10 @@ const AppRoutes = () => {
           <Route
           path="/admin/users"
           element={<AllUsersAdmin />} />
+
+          <Route
+          path="/users/:id"
+          element={<SingleUser />} />
 
         </Routes>
         

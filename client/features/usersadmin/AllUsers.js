@@ -25,7 +25,7 @@ const AllUsersAdmin = () => {
       <ul>
         {users.map((user) => (
           <li>
-            <Link to={`/products/${user.id}`}>
+            <Link to={`/users/${user.id}`}>
               <p>{user.username}</p>
             </Link>
             <button onClick={() => handleDelete(user.id)}>Delete User</button>
