@@ -9,7 +9,7 @@ import { EditProduct } from "../singleProduct/EditProduct";
 
 // TODO IMPLEMENT isADMIN VARIABLE
 
-const SingleProduct = () => {
+const SingleProductAdmin = () => {
   const { id } = useParams();
 
   const singleProduct = useSelector(selectSingleProduct);
@@ -26,6 +26,7 @@ const SingleProduct = () => {
   return (
     <div id="singleProduct">
       <div id="singleProductInfo">
+      <EditProduct />
         <img src={imageUrl} />
         <h1>{name}</h1>
         <h2>${price}</h2>
@@ -44,4 +45,4 @@ const SingleProduct = () => {
 }; */
 }
 
-export default SingleProduct;
+export default SingleProductAdmin;
