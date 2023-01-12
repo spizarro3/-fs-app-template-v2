@@ -4,7 +4,9 @@ const {
 } = require('../db');
 module.exports = router;
 
-router.post('/login', async (req, res, next) => {
+
+//TODO CHECK GET
+router.get('/login', async (req, res, next) => {
   try {
     res.send({ token: await User.authenticate(req.body) });
   } catch (err) {
@@ -28,7 +30,7 @@ router.post('/signup', async (req, res, next) => {
 router.get('/me', async (req, res, next) => {
   try {
     res.send(await User.findByToken(req.headers.authorization));
-  } catch (ex) {
+   } catch (ex) {
     next(ex);
   }
 });
