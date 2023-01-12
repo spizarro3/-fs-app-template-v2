@@ -1,10 +1,11 @@
 import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { useParams, useNavigate } from "react-router-dom"
+import { useParams, useNavigate, Link } from "react-router-dom"
 import { selectSingleUser } from "../usersadmin/singleUserSlice";
 import { fetchSingleUserAsync } from "../usersadmin/singleUserSlice";
 import { deleteSingleUserAsync } from "../usersadmin/usersSlice";
 import { deleteSingleCartAsync } from "../usersadmin/usersSlice";
+import Cart from "../cart/Cart";
 
 
 const SingleUser = () => {
@@ -31,6 +32,7 @@ const SingleUser = () => {
     <div id="user">
             <p>{user.username}</p>
             <button onClick={() => handleDelete(user.id)}>Delete User</button>
+            <Link to="/cart">Cart<Cart userId={id}/></Link>
     </div>
         )}
       
