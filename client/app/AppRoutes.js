@@ -10,6 +10,7 @@ import AllProductsAdmin from '../features/allproducts/AllProductsAdmin';
 import SingleProduct from "../features/singleProduct/SingleProduct";
 import AllUsersAdmin from '../features/usersadmin/AllUsers';
 import SingleUser from '../features/usersadmin/SingleUser';
+import Cart from '../features/cart/Cart';
 
 
 /**
@@ -35,7 +36,9 @@ const AppRoutes = () => {
           <Route
           path="/users/:id"
           element={<SingleUser />} />
-
+ <Route
+          path="/cart"
+          element={<Cart />} />
 
         </Routes>
       ) : (

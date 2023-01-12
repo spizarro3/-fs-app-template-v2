@@ -14,6 +14,10 @@ const AuthForm = ({ name, displayName }) => {
 
   const isLoggedIn = useSelector((state) => !!state.auth.me.id);
   
+  const notLoggedIn = useSelector((state) => !!state.auth.me);
+  console.log("NOT LOGGEN IN: ", notLoggedIn)
+  console.log("LOGGEN IN: ", isLoggedIn)
+
   const handleSubmit = (evt) => {
     evt.preventDefault();
     const formName = evt.target.name;
