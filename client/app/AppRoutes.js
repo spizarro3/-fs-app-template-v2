@@ -38,8 +38,14 @@ const AppRoutes = () => {
  <Route
           path="/cart"
           element={<Cart />} />
-
+  <Route
+          path="/products"
+          element={<AllProducts />} />
+          <Route
+          path="/products/:id"
+          element={<SingleProduct />} />
         </Routes>
+        
       ) : (
         <Routes>
           <Route

@@ -26,13 +26,16 @@ Cart.prototype.updateTotal = async function () {
   }, 0);
 };
 
-Cart.prototype.addItem = async function (product) {
-  await this.items.push(product.id);
+Cart.prototype.addItem = async function (productId) {
+  const product = await this.getProduct(productId);
+  if (product) {
+    await product.cartProduct.increment("quantity");
+  } else {
+    await this.addProduct(productId, { through: { quantity: 1 } });
+  }
+  await this.updateTotal();
 };
-  
-Cart.prototype.removeItem = async function (product) {
-  this.items = await this.items.filter((item) => item !== product.id);
-};
+
 
 
 module.exports = Cart;

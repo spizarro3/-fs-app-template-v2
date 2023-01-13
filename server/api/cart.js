@@ -1,12 +1,14 @@
 const router = require("express").Router();
 module.exports = router;
 
-const { models: {Product, Cart, User} } = require("../db");
+const {
+  models: { Product, Cart, User },
+} = require("../db");
 
 // All products route
 router.get("/", async (req, res, next) => {
   try {
-    const products = await Cart.findAll({where : {userId : req.user.id}});
+    const products = await Cart.findAll({ where: { userId: req.user.id } });
     res.send(products);
   } catch (error) {
     console.log("Error in all products route");
@@ -16,16 +18,39 @@ router.get("/", async (req, res, next) => {
 
 router.delete("/:cartId", async (req, res, next) => {
   try {
-  const cart = await Cart.findByPk(req.params.cartId);
-  res.send( await cart.destroy());
+    const cart = await Cart.findByPk(req.params.cartId);
+    res.send(await cart.destroy());
   } catch (error) {
-  console.log("Error in delete cart route");
-  next(error);
+    console.log("Error in delete cart route");
+    next(error);
   }
-  });
+});
 
+router.put("/:cartId/:productId", async (req, res, next) => {
+  try {
+    const cart = await Cart.findByPk(req.params.cartId);
+    console.log("CART IM ADD TO CART ROUTE: ", cart)
+    const product = await Product.findByPk(req.params.productId)
+    console.log("Product IM ADD TO CART ROUTE: ", product)
+    await cart.addProduct(product)
+    
+    // res.send(await cart.update(req.body));
+  } catch (error) {
+    console.log("Error in update cart route");
+    next(error);
+  }
+});
 
-
+router.put("/:cartId", async (req, res, next) => {
+  try {
+    console.log("REQ.BODY: ", req.body)
+    const cart = await Cart.findByPk(req.params.cartId);
+    res.send(await cart.addItem(req.body.id));
+  } catch (error) {
+    console.log("Error in update cart route");
+    next(error);
+  }
+});
 
 // const requireToken = async (req, res, next) => {
 //   try {
@@ -40,7 +65,6 @@ router.delete("/:cartId", async (req, res, next) => {
 //     next(ex);
 //   }
 // };
-
 
 // router.get('/:userId/cart', async (req, res, next) => {
 //   console.log("HELLO FORM GET CART ROUTE", req.user.id)

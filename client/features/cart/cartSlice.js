@@ -6,12 +6,19 @@ import axios from "axios";
 export const getCart = createAsyncThunk("getCart/", async(userId)=>{
    console.log("HELLO From get cart thunk", userId)
    try{
-       const {data} = await axios.get(`/api/cart/${userId}/cart`)
+       const {data} = await axios.get(`/api/cart/${userId}`)
        return data
    }catch(error){
        console.log("Error in getCart thunk", error)
    }
 })
+
+export const editCartAsync = createAsyncThunk("editCart", async (cart) => {
+      
+    const { data } = await axios.put(`/api/cart/${cart.cartId}`, cart);
+    console.log("DATA IN editCArt Thunk, ", data)
+    return data;
+  });
 
  
 const initialState =[]

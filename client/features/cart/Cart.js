@@ -49,10 +49,7 @@ useEffect(() => {
             </Link>
           )): ""}
       </ul>
-      
-
     </div>
-
 </div>
  )
 }
