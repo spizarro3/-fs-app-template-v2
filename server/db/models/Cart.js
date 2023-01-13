@@ -18,4 +18,14 @@ const Cart = db.define('cart', {
   },
 })
 
+Cart.prototype.updateTotal = function() {
+  this.totalQuantity = this.products.reduce((acc, product) => {
+    return acc + product.cartProduct.quantity
+  }, 0)
+  this.totalPrice = this.products.reduce((acc, product) => {
+    return acc + product.cartProduct.quantity * product.price
+  }, 0)
+}
+
+
 module.exports = Cart

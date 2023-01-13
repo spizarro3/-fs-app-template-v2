@@ -1,7 +1,7 @@
 const router = require("express").Router();
 module.exports = router;
 
-const { models: {Product, Cart} } = require("../db");
+const { models: {Product, Cart, User} } = require("../db");
 
 // All products route
 router.get("/", async (req, res, next) => {
@@ -13,3 +13,44 @@ router.get("/", async (req, res, next) => {
     next(error);
   }
 });
+
+
+
+
+// const requireToken = async (req, res, next) => {
+//   try {
+//     // const token = req.headers.authorization;
+//     // console.log("TOKEIN", token)
+//     const user = await User.findByToken(req.headers.authorization);
+//     console.log("usssseer", user)
+//     req.user = user;
+//     console.log("REQ>USER: ", user)
+//     next();
+//   } catch (ex) {
+//     next(ex);
+//   }
+// };
+
+
+// router.get('/:userId/cart', async (req, res, next) => {
+//   console.log("HELLO FORM GET CART ROUTE", req.user.id)
+//   // const { userId } = req.params;
+//   //   console.log("HERE'S USER ID: ", userId)
+//   //   console.log("")
+//   // try {
+//   //   // const { userId } = req.params;
+//   //   const userId = req.params
+//   //   // console.log("HERE DA USER ID: ", userId)
+//   //   if (req.user.id === +userId) {
+//   //     const notes = await Cart.findAll({
+//   //       where: { userId },
+//   //       attributes: ['text'],
+//   //     });
+//   //     res.send(notes);
+//   //   } else {
+//   //     next({ message: 'unauthorized' });
+//   //   }
+//   // } catch (ex) {
+//   //   next(ex);
+//   // }
+// });
