@@ -45,7 +45,7 @@ router.put("/:cartId", async (req, res, next) => {
   try {
     console.log("REQ.BODY: ", req.body)
     const cart = await Cart.findByPk(req.params.cartId);
-    res.send(await cart.addItem(req.body.id));
+    res.send(await cart.addProduct(req.body.id));
   } catch (error) {
     console.log("Error in update cart route");
     next(error);
