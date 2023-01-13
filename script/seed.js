@@ -8,21 +8,19 @@ const seed = async () => {
   await db.sync({ force: true });
   console.log("db synced!");
   for (let i = 0; i <= 100; i++) {
+    const newUser = await User.create({
+      username: faker.internet.userName(),
+      password: faker.internet.password(),
+    });
+    const newCart = await Cart.create({userId : newUser.id});
     await Product.create({
       name: faker.commerce.productName(),
       price: faker.commerce.price(),
       description: faker.commerce.productDescription(),
       imageUrl: faker.image.imageUrl(),  
       quantity : Math.floor(Math.random() * 100),  
-      cartId : Math.floor((Math.random() * 100) + 1)   
+      cartId : newCart.id   
     });
-};
-  for (let i = 0; i <= 100; i++) {
-    const newUser = await User.create({
-      username: faker.internet.userName(),
-      password: faker.internet.password(),
-    });
-    Cart.create({userId : newUser.id});
   }
 };
 
