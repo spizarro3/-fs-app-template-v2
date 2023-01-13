@@ -1,14 +1,13 @@
-const Sequelize = require('sequelize')
-const db = require('../db')
+const Sequelize = require("sequelize");
+const db = require("../db");
 
-
-const Cart = db.define('cart', {
+const Cart = db.define("cart", {
   userId: {
     type: Sequelize.INTEGER,
     allowNull: false,
-    unique: true
+    unique: true,
   },
-  totalQuantity: { 
+  totalQuantity: {
     type: Sequelize.INTEGER,
     defaultValue: 0,
   },
@@ -16,16 +15,19 @@ const Cart = db.define('cart', {
     type: Sequelize.FLOAT,
     defaultValue: 0,
   },
-})
+  items: {
+    type: Sequelize.ARRAY(Sequelize.INTEGER),
+    defaultValue: [],
+  },
+});
 
-Cart.prototype.updateTotal = function() {
+Cart.prototype.updateTotal = function () {
   this.totalQuantity = this.products.reduce((acc, product) => {
-    return acc + product.cartProduct.quantity
-  }, 0)
+    return acc + product.cartProduct.quantity;
+  }, 0);
   this.totalPrice = this.products.reduce((acc, product) => {
-    return acc + product.cartProduct.quantity * product.price
-  }, 0)
-}
+    return acc + product.cartProduct.quantity * product.price;
+  }, 0);
+};
 
-
-module.exports = Cart
+module.exports = Cart;
