@@ -21,21 +21,21 @@ const Cart = db.define("cart", {
   },
 });
 
-Cart.prototype.updateTotal = function () {
-  this.totalQuantity = this.products.reduce((acc, product) => {
+Cart.prototype.updateTotal = async function (product) {
+  this.totalQuantity = await this.products.reduce((acc, product) => {
     return acc + product.cartProduct.quantity;
   }, 0);
-  this.totalPrice = this.products.reduce((acc, product) => {
+  this.totalPrice = await this.products.reduce((acc, product) => {
     return acc + product.cartProduct.quantity * product.price;
   }, 0);
 };
 
-Cart.prototype.addItem = function () {
-  this.items.push(product.id);
+Cart.prototype.addItem = async function (product) {
+  await this.items.push(product.id);
 };
   
-Cart.prototype.removeItem = function () {
-  this.items = this.items.filter((item) => item !== product.id);
+Cart.prototype.removeItem = async function (product) {
+  this.items = await this.items.filter((item) => item !== product.id);
 };
 
 

@@ -8,13 +8,6 @@ const seed = async () => {
   await db.sync({ force: true });
   console.log("db synced!");
   for (let i = 0; i <= 100; i++) {
-    const newUser = await User.create({
-      username: faker.internet.userName(),
-      password: faker.internet.password(),
-    });
-    Cart.create({userId : newUser.id});
-  }
-  for (let i = 0; i <= 100; i++) {
     await Product.create({
       name: faker.commerce.productName(),
       price: faker.commerce.price(),
@@ -24,6 +17,13 @@ const seed = async () => {
       cartId : Math.floor((Math.random() * 100) + 1)   
     });
 };
+  for (let i = 0; i <= 100; i++) {
+    const newUser = await User.create({
+      username: faker.internet.userName(),
+      password: faker.internet.password(),
+    });
+    Cart.create({userId : newUser.id});
+  }
 };
 
 async function runSeed() {
