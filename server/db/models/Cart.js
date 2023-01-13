@@ -15,13 +15,9 @@ const Cart = db.define("cart", {
     type: Sequelize.FLOAT,
     defaultValue: 0,
   },
-  items: {
-    type: Sequelize.ARRAY(Sequelize.INTEGER),
-    defaultValue: [],
-  },
 });
 
-Cart.prototype.updateTotal = async function (product) {
+Cart.prototype.updateTotal = async function () {
   this.totalQuantity = await this.products.reduce((acc, product) => {
     return acc + product.cartProduct.quantity;
   }, 0);
