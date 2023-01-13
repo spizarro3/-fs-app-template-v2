@@ -10,33 +10,36 @@ const EditProduct = () => {
   const [description, setDescription] = useState("");
   const [quantity, setQuantity] = useState("");
 
+
+
   const dispatch = useDispatch();
   const { id } = useParams();
 
   useEffect(() => {
     dispatch(fetchSingleProduct(id)).then((res) => {
       const { imageUrl, name, price, description, quantity } = res.payload;
+
       setImageUrl(imageUrl);
       setName(name);
       setPrice(price);
       setDescription(description);
       setQuantity(quantity);
     });
-  }, [id]);
+  }, [dispatch]);
 
   const handleEditProduct = (e) => {
     e.preventDefault();
     dispatch(
-      editSingleProduct({ name, price, description, imageUrl, quantity })
+      editSingleProduct({ id, name, price, description, imageUrl, quantity })
     ).then(() => {
-      dispatch(fetchSingleProduct());
+      dispatch(fetchSingleProduct(id));
     });
   };
 
   return (
-    <div className="edit-product">
-      <h1> Edit Product </h1>
-      <form id="productForm" onSubmit={handleEditProduct}>
+    <div id="editProduct">
+      <h1>Edit Product</h1>
+      <form onSubmit={handleEditProduct}>
         <label htmlFor="imageUrl">Image Url:</label>
         <input
           name="imageUrl"
@@ -51,23 +54,24 @@ const EditProduct = () => {
         />
         <label htmlFor="price">Price:</label>
         <input
-          name="Price"
+          name="price"
           value={price}
           onChange={(e) => setPrice(e.target.value)}
         />
         <label htmlFor="description">Description:</label>
         <input
-          name="Description"
+          name="description"
           value={description}
           onChange={(e) => setDescription(e.target.value)}
         />
         <label htmlFor="quantity">Quantity:</label>
         <input
-          name="Quantity"
+          name="quantity"
           value={quantity}
           onChange={(e) => setQuantity(e.target.value)}
         />
-        <button type="submit">Edit Product</button>
+        <button type="submit">Edit</button>
+        {/* <button onClick={() => setEdit(!edit)} type="submit">Edit Product</button> */}
       </form>
     </div>
   );
