@@ -1,18 +1,19 @@
 import React, { useEffect } from "react";
-import { useParams, Link } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import {
   selectSingleProduct,
   fetchSingleProduct,
 } from "../singleProduct/singleProductSlice.js";
-import { EditProduct } from "../singleProduct/EditProduct";
+import EditProduct from "../singleProduct/EditProduct";
 
-// TODO IMPLEMENT isADMIN VARIABLE
 
-const SingleProduct = () => {
+
+const SingleProductAdmin = () => {
   const { id } = useParams();
 
   const singleProduct = useSelector(selectSingleProduct);
+
 
   const dispatch = useDispatch();
 
@@ -20,11 +21,11 @@ const SingleProduct = () => {
     dispatch(fetchSingleProduct(id));
   }, [dispatch]);
 
-  const { name, price, description, imageUrl, quantity } =
-    singleProduct.singleProduct;
+  const { name, price, description, imageUrl, quantity } = singleProduct.singleProduct;
 
   return (
     <div id="singleProduct">
+      <EditProduct />
       <div id="singleProductInfo">
         <img src={imageUrl} />
         <h1>{name}</h1>
@@ -36,12 +37,4 @@ const SingleProduct = () => {
   );
 };
 
-{
-  /* isAdmin ?         <EditProduct />
-        : null      </div>
-    </div>
-  );
-}; */
-}
-
-export default SingleProduct;
+export default SingleProductAdmin;

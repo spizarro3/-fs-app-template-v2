@@ -9,7 +9,7 @@ export const fetchProductsAsync = createAsyncThunk("allProducts", async () => {
     });
 
     export const addProductAsync = createAsyncThunk("addProduct", async ({name, price, description, imageUrl, quantity}) => {
-      
+
       const { data } = await axios.post(`/api/products`, {name, price, description, imageUrl, quantity});
         return data;
       });
@@ -33,9 +33,9 @@ export const fetchProductsAsync = createAsyncThunk("allProducts", async () => {
       builder.addCase(deleteSingleProductAsync.fulfilled, (state, action) => {
         state = state.filter(product =>{
           return product.id !== action.payload
-        }); 
+        });
       });
-      
+
 
     },
   });

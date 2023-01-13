@@ -1,17 +1,16 @@
-
-import React, { useEffect } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
-import { Route, Routes } from 'react-router-dom';
-import AuthForm from '../features/auth/AuthForm';
-import Home from '../features/home/Home';
-import AllProducts from '../features/allproducts/AllProducts';
-import { me } from './store';
-import AllProductsAdmin from '../features/allproducts/AllProductsAdmin';
+import React, { useEffect } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import { Route, Routes } from "react-router-dom";
+import AuthForm from "../features/auth/AuthForm";
+import Home from "../features/home/Home";
+import AllProducts from "../features/allproducts/AllProducts";
+import { me } from "./store";
+import AllProductsAdmin from "../features/allproducts/AllProductsAdmin";
 import SingleProduct from "../features/singleProduct/SingleProduct";
+import SingleProductAdmin from "../features/singleProduct/SingleProductAdmin";
 import AllUsersAdmin from '../features/usersadmin/AllUsers';
 import SingleUser from '../features/usersadmin/SingleUser';
 import Cart from '../features/cart/Cart';
-
 
 /**
  * COMPONENT
@@ -63,7 +62,12 @@ const AppRoutes = () => {
           <Route
           path="/admin/products"
           element={<AllProductsAdmin />} />
+          
           <Route path="/products/:id" element={<SingleProduct />} />
+          
+         <Route path="/admin/products/:id" element={<SingleProductAdmin />} />
+           
+           
 
           <Route
           path="/admin/users"
@@ -74,7 +78,6 @@ const AppRoutes = () => {
           element={<SingleUser />} />
 
         </Routes>
-        
       )}
     </div>
   );
