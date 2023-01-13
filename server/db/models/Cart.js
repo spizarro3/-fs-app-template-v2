@@ -30,4 +30,13 @@ Cart.prototype.updateTotal = function () {
   }, 0);
 };
 
+Cart.prototype.addItem = function () {
+  this.items.push(product.id);
+};
+  
+Cart.prototype.removeItem = function () {
+  this.items = this.items.filter((item) => item !== product.id);
+};
+
+
 module.exports = Cart;
