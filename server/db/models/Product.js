@@ -29,12 +29,12 @@ const Product = db.define("product", {
 
 Product.prototype.updateQuantity = async function (quantity) {
     this.quantity = await this.quantity - quantity;
-    this.save();
+    await this.save();
 };
 
 Product.prototype.addQuantity = async function (quantity) {
     this.quantity = await this.quantity + quantity;
-    this.save();
+    await this.save();
 };
 
 Product.prototype.updatePrice = async function (price) {
