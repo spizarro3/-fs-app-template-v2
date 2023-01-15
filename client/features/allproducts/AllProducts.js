@@ -41,7 +41,6 @@ const cartId = me.id
               <p>{product.name}</p>
               <p>${product.price}</p>
             </Link>
-            <p>HELLO WORLD</p>
             <button onClick={() => handleAddToCart(product)}>Add to cart</button>
           </li>
         ))}
