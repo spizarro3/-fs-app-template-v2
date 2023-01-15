@@ -9,6 +9,7 @@ import AddProduct from "../allproducts/AddProduct";
 
 
 
+
 const AllProductsAdmin = () => {
   const products = useSelector(selectProducts);
 
@@ -18,6 +19,7 @@ const AllProductsAdmin = () => {
     dispatch(deleteSingleProductAsync(productId)).then(()=>dispatch(fetchProductsAsync()))
   
   }
+
 
   useEffect(() => {
     dispatch(fetchProductsAsync());
