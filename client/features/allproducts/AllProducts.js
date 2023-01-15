@@ -3,15 +3,30 @@ import { useSelector, useDispatch } from "react-redux";
 import { Link } from "react-router-dom"
 import { selectProducts } from "../allproducts/productsSlice";
 import { fetchProductsAsync } from "../allproducts/productsSlice";
+import { selectMe } from "../auth/authSlice";
+import { editCartAsync } from "../cart/cartSlice";
 
 
 const AllProducts = () => {
   const products = useSelector(selectProducts);
 
+  const me = useSelector(selectMe)
+
+const cartId = me.id
+
   const dispatch = useDispatch()
+
+  const handleAddToCart = (product) => {
+    
+  const id = product.id
+
+    dispatch(editCartAsync({cartId,  id}))
+    console.log("ID",id)
+  };
 
   
   useEffect(() => {
+    console.log("CART ID: ", cartId)
     dispatch(fetchProductsAsync());
   }, [dispatch] );
 
@@ -26,6 +41,8 @@ const AllProducts = () => {
               <p>{product.name}</p>
               <p>${product.price}</p>
             </Link>
+            <p>HELLO WORLD</p>
+            <button onClick={() => handleAddToCart(product)}>Add to cart</button>
           </li>
         ))}
       </ul>
