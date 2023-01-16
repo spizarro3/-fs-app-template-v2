@@ -12,6 +12,7 @@ import AddProduct from "../allproducts/AddProduct";
 
 const AllProductsAdmin = () => {
   const products = useSelector(selectProducts);
+  console.log("ALL PRODUCTS ADMIN: ", products)
 
   const dispatch = useDispatch()
 
@@ -31,7 +32,7 @@ const AllProductsAdmin = () => {
       <ul>
         {products.map((product) => (
           <li>
-            <Link to={`/products/${product.id}`}>
+            <Link to={`/admin/products/${product.id}`}>
               <img src={product.imageUrl} />
               <p>{product.name}</p>
               <p>${product.price}</p>

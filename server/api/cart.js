@@ -26,32 +26,56 @@ router.delete("/:cartId", async (req, res, next) => {
   }
 });
 
-router.put("/:cartId/:productId", async (req, res, next) => {
-  try {
-    const cart = await Cart.findByPk(req.params.cartId);
-    console.log("CART IM ADD TO CART ROUTE: ", cart)
-    const product = await Product.findByPk(req.params.productId)
-    console.log("Product IM ADD TO CART ROUTE: ", product)
-    await cart.addProduct(product)
-    
-    // res.send(await cart.update(req.body));
-  } catch (error) {
-    console.log("Error in update cart route");
-    next(error);
-  }
-});
 
+
+// OLD ADD TO CART ROUTE >>> STILL GOOD
+
+// router.put("/:cartId", async (req, res, next) => {
+//   try {
+//     const cart = await Cart.findByPk(req.params.cartId);
+//     res.send(await cart.addProduct(req.body.id));
+//   } catch (error) {
+//     console.log("Error 1 in update cart route");
+//     next(error);
+//   }
+// });
+
+// EXPERIMENTAL ADD TO CART ROUTE
 router.put("/:cartId", async (req, res, next) => {
   try {
-    console.log("REQ.BODY: ", req.body)
     const cart = await Cart.findByPk(req.params.cartId);
     res.send(await cart.addProduct(req.body.id));
   } catch (error) {
-    console.log("Error in update cart route");
+    console.log("Error 1 in update cart route");
     next(error);
   }
 });
 
+
+
+router.put("/remove/:cartId", async (req, res, next) => {
+  try {
+    const cart = await Cart.findByPk(req.body.meId);
+    const product = await Product.findByPk(req.body.productId);
+    res.send(await cart.removeProduct(product));
+    // await cart.removeProduct(product)
+  } catch (error) {
+    console.log("Error in REMOVEEEEfrom cart route");
+    next(error);
+  }
+});
+
+// ADDED
+
+router.get("/:id/cart", async (req, res, next) => {
+  try {
+    const products = await Cart.findByPk(req.params.id, { include: Product});
+    res.send(products);
+  } catch (error) {
+    console.log("Error in all products route");
+    next(error);
+  }
+});
 // const requireToken = async (req, res, next) => {
 //   try {
 //     // const token = req.headers.authorization;

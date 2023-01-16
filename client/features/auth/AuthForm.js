@@ -15,8 +15,12 @@ const AuthForm = ({ name, displayName }) => {
   const isLoggedIn = useSelector((state) => !!state.auth.me.id);
   
   const notLoggedIn = useSelector((state) => !!state.auth.me);
-  console.log("NOT LOGGEN IN: ", notLoggedIn)
-  console.log("LOGGEN IN: ", isLoggedIn)
+  console.log("NOT LOGGEN IN Auth form: ", notLoggedIn)
+  console.log("LOGGEN IN Auth from: ", isLoggedIn)
+
+  const isAdmin = useSelector((state) => !!state.auth.me.isAdmin === true)
+  console.log("IS ADMIN Auth from????: ", isAdmin)
+
 
   const handleSubmit = (evt) => {
     evt.preventDefault();
@@ -28,7 +32,7 @@ const AuthForm = ({ name, displayName }) => {
 
   return (
     <>
-    {!isLoggedIn ? (
+    {!isLoggedIn || (isLoggedIn && isAdmin) ? (
     <div>
       <form onSubmit={handleSubmit} name={name}>
         <div>
