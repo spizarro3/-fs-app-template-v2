@@ -3,7 +3,7 @@ const {
   db,
   models: { User, Product, Cart },
 } = require("../server/db/index.js");
-
+// COMMENT
 const seed = async () => {
   await db.sync({ force: true });
   console.log("db synced!");
