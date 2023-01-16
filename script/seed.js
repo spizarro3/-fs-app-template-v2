@@ -12,7 +12,7 @@ const seed = async () => {
       username: faker.internet.userName(),
       password: faker.internet.password(),
     });
-    const newCart = await Cart.create({userId : newUser.id});
+    await Cart.create({userId : newUser.id});
     await Product.create({
       name: faker.commerce.productName(),
       price: faker.commerce.price(),
