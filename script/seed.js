@@ -21,6 +21,7 @@ const seed = async () => {
       quantity : Math.floor(Math.random() * 100),   
     });
   }
+  await User.create({username: "admin", password: "12345", isAdmin: true })
 };
 
 async function runSeed() {

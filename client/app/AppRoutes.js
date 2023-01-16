@@ -19,8 +19,6 @@ import Cart from '../features/cart/Cart';
 const AppRoutes = () => {
   const isLoggedIn = useSelector((state) => !!state.auth.me.id);
   const isAdmin = useSelector((state) => state.auth.me.isAdmin)
-  console.log("ISLOGGED IN APP ROUTES????: ", isLoggedIn)
-  console.log("IS ADMIN????: ", isAdmin)
   const dispatch = useDispatch();
 
   useEffect(() => {

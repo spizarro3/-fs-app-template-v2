@@ -45,30 +45,31 @@
 // export default cart.reducer
 
 
-import { createSlice, createAsyncThunk} from "@reduxjs/toolkit";
+import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
  
 // const token = window.localStorage.getItem(TOKEN)
 
-export const getCart = createAsyncThunk("getCart/", async(userId)=>{
-   try{
-       const {data} = await axios.get(`/api/cart/${userId}`)
-       return data
-   }catch(error){
-       console.log("Error in getCart thunk", error)
-   }
-})
+// export const getCart = createAsyncThunk("getCart/", async(userId)=>{
+//    try{
+//        const {data} = await axios.get(`/api/cart/${userId}`)
+//        return data
+//    }catch(error){
+//        console.log("Error in getCart thunk", error)
+//    }
+// })
 
-export const getCart2 = createAsyncThunk("getCart2/", async(userId)=>{
+export const getCartAsync = createAsyncThunk("getCart", async (userId)=>{
     try{
-        const {data} = await axios.get(`/api/cart/${userId}/cart`)
+        const { data } = await axios.get(`/api/cart/${userId}/cart`)
         return data
     }catch(error){
-        console.log("Error in getCart2 thunk", error)
+        console.log("Error in getCart thunk", error)
     }
  })
 
 export const editCartAsync = createAsyncThunk("editCart", async (cart) => {
+    console.log("CART IN EDIT CART ASYNC: ", cart)
       try{
     const { data } = await axios.put(`/api/cart/${cart.cartId}`, cart);
     return data;
@@ -77,7 +78,7 @@ export const editCartAsync = createAsyncThunk("editCart", async (cart) => {
       }
   });
 
-  export const removeFromCart = createAsyncThunk("removeFromCart", async (info) => {
+  export const removeFromCartAsync = createAsyncThunk("removeFromCart", async (info) => {
     try{
          const { data } = await axios.put(`/api/cart/remove/${info.meId}`, info);
          return data;
@@ -95,16 +96,17 @@ const cart = createSlice({
    reducers: {
  
    },
-   extraReducers: (builder)=>{
-       builder.addCase(getCart.fulfilled, (state, action)=>{
+   extraReducers: (builder) => {
+       builder.addCase(getCartAsync.fulfilled, (state, action)=>{
            return action.payload
        }),
-       builder.addCase(getCart2.fulfilled, (state, action)=>{
+    //    builder.addCase(getCart2.fulfilled, c(state, action)=>{
+    //     return action.payload
+    // })
+    builder.addCase(removeFromCartAsync.fulfilled, (state, action)=>{
+        console.log("REMOVE FROM CART THUNK FULFILLED", action.payload)
         return action.payload
-    })
-    builder.addCase(removeFromCart.fulfilled, (state, action)=>{
-        return action.payload
-    })
+    }),
     builder.addCase(editCartAsync.fulfilled, (state, action)=>{
         return action.payload
     })
