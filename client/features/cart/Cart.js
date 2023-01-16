@@ -61,7 +61,7 @@
 import React, { useEffect } from 'react'
 import { useSelector, useDispatch } from "react-redux";
 import { Link, useParams } from "react-router-dom"
-import { getCart, getCart2, selectCart } from './cartSlice'
+import { getCart, getCart2, selectCart, removeFromCart } from './cartSlice'
 
 import { selectProducts } from '../allproducts/productsSlice';
 import { fetchProductsAsync } from '../allproducts/productsSlice';
@@ -85,6 +85,7 @@ console.log("CARTID: ",typeof cartId)
 // const products = useSelector(selectProducts);
 
 const me = useSelector(selectMe)
+const meId = me.id
 console.log("MEMEMEME: ", me.id)
 const dispatch = useDispatch()
 
@@ -95,6 +96,12 @@ useEffect(() => {
   dispatch(getCart2(me.id))
 }, [dispatch] );
  
+
+const handleRemoveFromCart = (productId)=>{
+  dispatch(removeFromCart({productId, meId})).then(()=>{
+    dispatch(getCart2(me.id))
+  })
+}
  
  return (
   <div id="allProducts">
@@ -104,14 +111,18 @@ useEffect(() => {
       <ul className="media-list">
         {products && products.length ? 
           products.map((product) => (
+            <div>
             <Link to={`/products/${product.id}`}>
               <img src={product.imageUrl} />
               <p>{product.name}</p>
               <p>${product.price}</p>
             </Link>
+            <button onClick={()=> handleRemoveFromCart(product.id)}>Delete From Cart</button>
+            </div>
           )): ""}
       </ul>
     </div>
+    <button>Checkout</button>
 </div>
  )
 }

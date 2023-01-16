@@ -26,20 +26,20 @@ router.delete("/:cartId", async (req, res, next) => {
   }
 });
 
-router.put("/:cartId/:productId", async (req, res, next) => {
-  try {
-    const cart = await Cart.findByPk(req.params.cartId);
-    console.log("CART IM ADD TO CART ROUTE: ", cart)
-    const product = await Product.findByPk(req.params.productId)
-    console.log("Product IM ADD TO CART ROUTE: ", product)
-    await cart.addProduct(product)
+// router.put("/:cartId/:productId", async (req, res, next) => {
+//   try {
+//     const cart = await Cart.findByPk(req.params.cartId);
+//     console.log("CART IM ADD TO CART ROUTE: ", cart)
+//     const product = await Product.findByPk(req.params.productId)
+//     console.log("Product IM ADD TO CART ROUTE: ", product)
+//     await cart.addProduct(product)
     
-    // res.send(await cart.update(req.body));
-  } catch (error) {
-    console.log("Error in update cart route");
-    next(error);
-  }
-});
+//     // res.send(await cart.update(req.body));
+//   } catch (error) {
+//     console.log("Error 2 in update cart route");
+//     next(error);
+//   }
+// });
 
 router.put("/:cartId", async (req, res, next) => {
   try {
@@ -47,7 +47,20 @@ router.put("/:cartId", async (req, res, next) => {
     const cart = await Cart.findByPk(req.params.cartId);
     res.send(await cart.addProduct(req.body.id));
   } catch (error) {
-    console.log("Error in update cart route");
+    console.log("Error 1 in update cart route");
+    next(error);
+  }
+});
+router.put("/remove/:cartId", async (req, res, next) => {
+  console.log("CART REMOVE REQ.BODY: ", req.body)
+  try {
+    console.log("CART REMOVE REQ.BODY: ", req.body)
+    const cart = await Cart.findByPk(req.body.meId);
+    const product = await Product.findByPk(req.body.productId);
+    res.send(await cart.removeProduct(product));
+    // await cart.removeProduct(product)
+  } catch (error) {
+    console.log("Error in REMOVEEEEfrom cart route");
     next(error);
   }
 });

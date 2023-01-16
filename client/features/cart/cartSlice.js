@@ -77,6 +77,23 @@ export const editCartAsync = createAsyncThunk("editCart", async (cart) => {
     return data;
   });
 
+  export const removeFromCart = createAsyncThunk("removeFromCart", async (info) => {
+      console.log("HI FROM REMOVE CART THUNJK")
+      console.log("INFO IN remove from cart thunk", info)
+    try{
+         console.log("INFO IN remove from cart thunk", info)
+        // console.log("CartID IN remove from cart thunk", cartId)
+         const { data } = await axios.put(`/api/cart/remove/${info.meId}`, info);
+         return data;
+      }catch(error){
+        console.log("ERROR in REMOVE FFROM CART THUNK")
+        
+      }
+    // const { data } = await axios.put(`/api/cart/${cart.cartId}`, cart);
+    // console.log("DATA IN editCArt Thunk, ", data)
+    // return data;
+  });
+
  
 const initialState =[]
 const cart = createSlice({
@@ -90,6 +107,9 @@ const cart = createSlice({
            return action.payload
        }),
        builder.addCase(getCart2.fulfilled, (state, action)=>{
+        return action.payload
+    })
+    builder.addCase(removeFromCart.fulfilled, (state, action)=>{
         return action.payload
     })
    }
