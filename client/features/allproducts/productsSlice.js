@@ -40,6 +40,6 @@ export const fetchProductsAsync = createAsyncThunk("allProducts", async () => {
   });
 
   export const selectProducts = (state) => {
-    return state.products;}
+    return state.products}
 
   export default productSlice.reducer

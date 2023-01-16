@@ -36,6 +36,4 @@ Cart.prototype.addItem = async function (productId) {
   await this.updateTotal();
 };
 
-
-
 module.exports = Cart;

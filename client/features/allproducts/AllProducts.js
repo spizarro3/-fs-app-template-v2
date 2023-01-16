@@ -7,20 +7,16 @@ import { selectMe } from "../auth/authSlice";
 import { editCartAsync } from "../cart/cartSlice";
 
 
-
-
 const AllProducts = () => {
   const products = useSelector(selectProducts);
-
   const me = useSelector(selectMe)
-
-const cartId = me.id
-
+  const cartId = me.id
+  
   const dispatch = useDispatch()
 
   const handleAddToCart = (product) => {
     const id = product.id
-    dispatch(editCartAsync({cartId,  id}))
+    dispatch(editCartAsync({cartId, id}))
     console.log("ID",id)
   };
 

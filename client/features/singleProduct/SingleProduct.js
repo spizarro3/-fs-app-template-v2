@@ -14,8 +14,7 @@ import { selectMe } from '../auth/authSlice';
 
 const SingleProduct = () => {
   const { id } = useParams();
-  console.log("TYPRE ID : ", typeof parseInt(id))
-
+  
   const singleProduct = useSelector(selectSingleProduct);
   const me = useSelector(selectMe)
   console.log(" ME.if type: ",typeof me.id)
