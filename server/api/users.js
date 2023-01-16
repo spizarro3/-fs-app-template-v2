@@ -5,9 +5,6 @@ module.exports = router
 router.get('/', async (req, res, next) => {
   try {
     const users = await User.findAll({
-      // explicitly select only the id and username fields - even though
-      // users' passwords are encrypted, it won't help if we just
-      // send everything to anyone who asks!
       attributes: ['id', 'username']
     })
     res.json(users)
@@ -15,3 +12,32 @@ router.get('/', async (req, res, next) => {
     next(err)
   }
 })
+
+router.get('/:userId', async (req, res, next) => {
+  try {
+    const user = await User.findByPk(req.params.userId)
+    res.json(user)
+  } catch (err) {
+    next(err)
+  }
+})
+
+router.get('/:userId/cart', async (req, res, next) => {
+  try {
+    const user = await User.findByPk(req.params.userId)
+    const cart = await user.getCart()
+    res.json(cart)
+  } catch (err) {
+    next(err)
+  }
+})
+
+router.delete("/:userId", async (req, res, next) => {
+  try {
+    const user = await User.findByPk(req.params.userId);
+    res.send( await user.destroy());
+  } catch (error) {
+    console.log("Error in delete user route");
+    next(error);
+  }
+});
