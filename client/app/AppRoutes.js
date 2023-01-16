@@ -35,9 +35,9 @@ const AppRoutes = () => {
 
           <Route to="/home" element={<Home />} />
 
-          <Route
+          {/* <Route
           path="/users/:id"
-          element={<SingleUser />} />
+          element={<SingleUser />} /> */}
  <Route
           path="/cart"
           element={<Cart />} />
@@ -92,6 +92,7 @@ const AppRoutes = () => {
           <Route
           path="/users/:id"
           element={<SingleUser />} />
+
           <Route path="/admin/products/:id" element={<SingleProductAdmin />} />
 
         </Routes>

@@ -41,6 +41,8 @@ const Navbar = () => {
         <Link to="/products">Products</Link>
         <Link to="/admin/products">Admin Products</Link>
         <Link to="admin/signupAdmin">Sign Up New Admin</Link> 
+        <Link to="admin/signupAdmin">Sign Up New Admin</Link> 
+        <Link to="admin/users">Users</Link> 
         {/* <Route
       ro="/products"
       element={<AllProducts />} /> */}
