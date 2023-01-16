@@ -74,23 +74,35 @@ import { selectMe } from '../auth/authSlice';
 
 
 
-const Cart = (props) => {
+const Cart = () => {
 
 
-console.log("PROPS IN CART COMPONENT: ", props.userId)
-let cartId = props.userId
-console.log("CARTID: ",typeof cartId)
 
  
 // const products = useSelector(selectProducts);
 
 const me = useSelector(selectMe)
 const meId = me.id
-console.log("MEMEMEME: ", me.id)
 const dispatch = useDispatch()
 
 const cart = useSelector(selectCart)
  const products = cart.products
+ console.log("PRODECTS: ", products)
+let totalMap;
+ if(products && products.length){
+ totalMap = products.map((product)=>{
+ return  product.price
+})
+ }else{
+  totalMap = []
+ }
+ let total = 0
+ if(totalMap[0]){
+ total = totalMap.reduce((a,b)=> a + b)
+ }
+ 
+ console.log("TOTALMAP: ", totalMap)
+console.log("TOTAL: ", total)
 
 useEffect(() => {
   dispatch(getCart2(me.id))
@@ -108,6 +120,7 @@ const handleRemoveFromCart = (productId)=>{
 
   <div>
     <h1>Your products</h1>
+    <h1>TOTAL: {total}</h1>
       <ul className="media-list">
         {products && products.length ? 
           products.map((product) => (

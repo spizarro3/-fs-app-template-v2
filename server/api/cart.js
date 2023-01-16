@@ -43,7 +43,6 @@ router.delete("/:cartId", async (req, res, next) => {
 
 router.put("/:cartId", async (req, res, next) => {
   try {
-    console.log("REQ.BODY: ", req.body)
     const cart = await Cart.findByPk(req.params.cartId);
     res.send(await cart.addProduct(req.body.id));
   } catch (error) {
@@ -52,9 +51,7 @@ router.put("/:cartId", async (req, res, next) => {
   }
 });
 router.put("/remove/:cartId", async (req, res, next) => {
-  console.log("CART REMOVE REQ.BODY: ", req.body)
   try {
-    console.log("CART REMOVE REQ.BODY: ", req.body)
     const cart = await Cart.findByPk(req.body.meId);
     const product = await Product.findByPk(req.body.productId);
     res.send(await cart.removeProduct(product));
