@@ -101,8 +101,14 @@ let totalMap;
  total = totalMap.reduce((a,b)=> a + b)
  }
  
- console.log("TOTALMAP: ", totalMap)
-console.log("TOTAL: ", total)
+const getNumber = (productId)=>{
+  const idArray = products.filter((product)=>{
+   return Number(product.id) === productId
+  })
+  console.log("idarray ", idArray)
+  
+  return idArray.length
+}
 
 useEffect(() => {
   dispatch(getCart2(me.id))
@@ -130,6 +136,7 @@ const handleRemoveFromCart = (productId)=>{
               <p>{product.name}</p>
               <p>${product.price}</p>
             </Link>
+            <p>Quantity: {getNumber(product.id)}</p>
             <button onClick={()=> handleRemoveFromCart(product.id)}>Delete From Cart</button>
             </div>
           )): ""}
