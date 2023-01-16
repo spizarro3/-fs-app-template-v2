@@ -30,7 +30,7 @@ const AllProductsAdmin = () => {
     <div id="allProducts">
     <AddProduct />
       <ul>
-        {products && products.length ? products.map((product) => (
+        {products.map((product) => (
           <li>
             <Link to={`/admin/products/${product.id}`}>
               <img src={product.imageUrl} />
@@ -39,7 +39,7 @@ const AllProductsAdmin = () => {
             </Link>
             <button onClick={() => handleDelete(product.id)}>Delete Product</button>
           </li>
-        )): " "}
+        ))}
       </ul>
     </div>
   )

@@ -32,7 +32,7 @@ const AuthForm = ({ name, displayName }) => {
 
   return (
     <>
-    {!isLoggedIn ? (
+    {!isLoggedIn || (isLoggedIn && isAdmin) ? (
     <div>
       <form onSubmit={handleSubmit} name={name}>
         <div>

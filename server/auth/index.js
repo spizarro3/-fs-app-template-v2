@@ -73,7 +73,7 @@ router.post('/signup', async (req, res, next) => {
 });
 
 router.post('/signupAdmin', async (req, res, next) => {
-
+console.log("HIT SIGNUP ADMINNNNNNNNN")
   try {
     const user = await User.create({username: req.body.username, password:req.body.password, isAdmin: true});
     Cart.create( {userId: user.id});

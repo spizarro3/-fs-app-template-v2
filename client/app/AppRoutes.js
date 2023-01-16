@@ -67,7 +67,10 @@ const AppRoutes = () => {
             path="/signup"
             element={<AuthForm name="signup" displayName="Sign Up" />}
           />
-         
+         <Route
+            path="admin/signupAdmin"
+            element={<AuthForm name="signupAdmin" displayName="Sign Up Admin" />}
+          />
           <Route
           path="/products"
           element={<AllProducts />} />
