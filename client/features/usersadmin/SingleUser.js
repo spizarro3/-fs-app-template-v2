@@ -21,7 +21,7 @@ const SingleUser = () => {
   const dispatch = useDispatch()
 
   const handleDelete = (userId) => {
-    dispatch(deleteSingleCartAsync(userId)).then(()=>dispatch(deleteSingleUserAsync(userId))).then(navigate('/home', {replace: true}))
+    dispatch(deleteSingleCartAsync(userId)).then(()=>dispatch(deleteSingleUserAsync(userId))).then(()=>(navigate('/admin/users', {replace: true})))
   }
 
   useEffect(() => {
@@ -32,7 +32,7 @@ const SingleUser = () => {
     <div id="user">
             <p>{user.username}</p>
             <button onClick={() => handleDelete(user.id)}>Delete User</button>
-            <Link to="/cart">Cart<Cart userId={id}/></Link>
+            {/* <Link to="/cart">Cart<Cart userId={id}/></Link> */}
     </div>
         )}
       

@@ -3,7 +3,7 @@ const {
   db,
   models: { User, Product, Cart },
 } = require("../server/db/index.js");
-
+// COMMENT
 const seed = async () => {
   await db.sync({ force: true });
   console.log("db synced!");
@@ -21,6 +21,7 @@ const seed = async () => {
       quantity : Math.floor(Math.random() * 100),   
     });
   }
+  await User.create({username: "admin", password: "12345", isAdmin: true })
 };
 
 async function runSeed() {

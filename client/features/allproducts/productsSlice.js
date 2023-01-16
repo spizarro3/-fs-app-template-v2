@@ -9,15 +9,14 @@ export const fetchProductsAsync = createAsyncThunk("allProducts", async () => {
     });
 
     export const addProductAsync = createAsyncThunk("addProduct", async ({name, price, description, imageUrl, quantity}) => {
-
       const { data } = await axios.post(`/api/products`, {name, price, description, imageUrl, quantity});
         return data;
       });
 
-      export const deleteSingleProductAsync = createAsyncThunk("deleteSingleProduct", async (id) => {
-         await axios.delete(`/api/products/${id}`);
-        return id;
-      })
+    export const deleteSingleProductAsync = createAsyncThunk("deleteSingleProduct", async (id) => {
+        await axios.delete(`/api/products/${id}`);
+      return id;
+    })
 
   const productSlice = createSlice({
     name: "products",

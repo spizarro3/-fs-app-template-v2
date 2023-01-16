@@ -10,12 +10,7 @@
 
 // import { selectMe } from '../auth/authSlice';
 
-
-
-
-
 // const Cart = (props) => {
-
 
 // console.log("PROPS IN CART COMPONENT: ", props.userId)
 // let cartId = props.userId
@@ -61,63 +56,57 @@
 import React, { useEffect } from 'react'
 import { useSelector, useDispatch } from "react-redux";
 import { Link, useParams } from "react-router-dom"
-import { getCart, getCart2, selectCart, removeFromCart } from './cartSlice'
+import { getCartAsync, selectCart, removeFromCartAsync } from './cartSlice'
 
 import { selectProducts } from '../allproducts/productsSlice';
 import { fetchProductsAsync } from '../allproducts/productsSlice';
 
-
-
 import { selectMe } from '../auth/authSlice';
 
 
-
-
-
 const Cart = () => {
-const me = useSelector(selectMe)
-const meId = me.id
-const dispatch = useDispatch()
+  const me = useSelector(selectMe)
+  const meId = me.id
+  const dispatch = useDispatch()
 
-const cart = useSelector(selectCart)
- const products = cart.products
+  const cart = useSelector(selectCart)
+  const products = cart.products
 
-let totalMap;
- if(products && products.length){
- totalMap = products.map((product)=>{
- return  product.price
-})
- }else{
-  totalMap = []
- }
- let total = 0
- if(totalMap[0]){
- total = totalMap.reduce((a,b)=> a + b)
- }
- 
-
-//  COULD USE COUNT MAGIC METHOD
-const getNumber = (productId)=>{
-  const idArray = products.filter((product)=>{
-   return Number(product.id) === productId
+  let totalMap;
+  if(products && products.length){
+  totalMap = products.map((product)=>{
+    return product.price
   })
-  return idArray.length
-}
+  }else{
+    totalMap = []
+  }
+  let total = 0
+  if(totalMap[0]){
+  total = totalMap.reduce((a,b)=> a + b)
+  }
+  
 
-useEffect(() => {
-  dispatch(getCart2(me.id))
-}, [dispatch] );
- 
+  //  COULD USE COUNT MAGIC METHOD
+  const getNumber = (productId)=>{
+    const idArray = products.filter((product) => {
+      return Number(product.id) === productId
+    })
+      return idArray.length
+  }
 
-const handleRemoveFromCart = (productId)=>{
-  dispatch(removeFromCart({productId, meId})).then(()=>{
-    dispatch(getCart2(me.id))
-  })
-}
+  useEffect(() => {
+    dispatch(getCartAsync(me.id))
+  }, [dispatch] );
+  
+
+  const handleRemoveFromCart = (productId)=>{
+    dispatch(removeFromCartAsync({productId, meId})).then(()=>{
+      dispatch(getCartAsync(me.id))
+    })
+  }
  
  return (
   <div id="allProducts">
-
   <div>
     <h1>Your products</h1>
     <h1>TOTAL: {total}</h1>

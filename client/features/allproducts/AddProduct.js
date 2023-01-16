@@ -13,10 +13,11 @@ const AddProduct = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    if (isNaN(price)){ alert("please input number in price field")}
+    if (name === "" ){alert("please provide product name")}
     dispatch(addProductAsync({ name, price, description, imageUrl, quantity })).then(()=>{dispatch(fetchProductsAsync())});
   };
   
-
   return (
     <form id="productForm" onSubmit={handleSubmit}>
       <label htmlFor="imageUrl">Image Url:</label>

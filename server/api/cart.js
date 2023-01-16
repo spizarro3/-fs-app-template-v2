@@ -2,11 +2,12 @@ const router = require("express").Router();
 module.exports = router;
 
 const {
-  models: { Product, Cart, User },
+  models: { Product, Cart, User, CartProduct },
 } = require("../db");
 
-// All products route
+// All products in cart route
 router.get("/", async (req, res, next) => {
+  console.log("REQ>USER: ", req.user)
   try {
     const products = await Cart.findAll({ where: { userId: req.user.id } });
     res.send(products);
@@ -30,18 +31,8 @@ router.delete("/:cartId", async (req, res, next) => {
 
 // OLD ADD TO CART ROUTE >>> STILL GOOD
 
-// router.put("/:cartId", async (req, res, next) => {
-//   try {
-//     const cart = await Cart.findByPk(req.params.cartId);
-//     res.send(await cart.addProduct(req.body.id));
-//   } catch (error) {
-//     console.log("Error 1 in update cart route");
-//     next(error);
-//   }
-// });
-
-// EXPERIMENTAL ADD TO CART ROUTE
 router.put("/:cartId", async (req, res, next) => {
+  console.log("REQ>BODY IN UPDATE CART", req.body)
   try {
     const cart = await Cart.findByPk(req.params.cartId);
     res.send(await cart.addProduct(req.body.id));
@@ -50,6 +41,28 @@ router.put("/:cartId", async (req, res, next) => {
     next(error);
   }
 });
+
+// EXPERIMENTAL ADD TO CART ROUTE
+// router.put("/:cartId", async (req, res, next) => {
+//   console.log("REQ BODY IN ADD TO CART ROUTE: ", req.body)
+//   // REQ BODY IN ADD TO CART ROUTE:  { cartId: 103, id: 4 }
+//   try {
+//     const cartProduct = await CartProduct.findAll({where: {cartId: req.params.cartId, productId: req.body.id}})
+    
+//     const cart = await Cart.findByPk(req.params.cartId);
+    
+//     if (cartProduct.length === 0) {
+//       res.send(await cart.addProduct(req.body.id));
+//     }
+//     else {
+//       const product = await Product.findByPk(req.body.id);
+//       res.send(await cart.addProduct(product, { through: { quantity: 1 } }));
+//     }
+//   } catch (error) {
+//     console.log("Error 1 in update cart route");
+//     next(error);
+//   }
+// });
 
 
 

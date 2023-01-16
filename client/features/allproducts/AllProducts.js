@@ -6,8 +6,8 @@ import { fetchProductsAsync } from "../allproducts/productsSlice";
 import { selectMe } from "../auth/authSlice";
 import { editCartAsync } from "../cart/cartSlice";
 
-import { selectMe } from "../auth/authSlice";
-import { editCartAsync } from "../cart/cartSlice";
+
+
 
 const AllProducts = () => {
   const products = useSelector(selectProducts);
@@ -19,23 +19,21 @@ const cartId = me.id
   const dispatch = useDispatch()
 
   const handleAddToCart = (product) => {
-    
-  const id = product.id
-
+    const id = product.id
     dispatch(editCartAsync({cartId,  id}))
     console.log("ID",id)
   };
 
   
-  const handleAddToCart = (product) => {
+  // const handleAddToCart = (product) => {
 
-    const id = product.id
+  //   const id = product.id
   
-      dispatch(editCartAsync({cartId,  id})).then(()=>{
-        dispatch(fetchProductsAsync());
-      })
-      console.log("ID",id)
-    };
+  //     dispatch(editCartAsync({cartId,  id})).then(()=>{
+  //       dispatch(fetchProductsAsync());
+  //     })
+  //     console.log("ID",id)
+  //   };
 
   useEffect(() => {
     console.log("CART ID: ", cartId)
@@ -44,7 +42,6 @@ const cartId = me.id
 
   return (
     <div id="allProducts">
-    
       <ul>
         {products.map((product) => (
           <li>
