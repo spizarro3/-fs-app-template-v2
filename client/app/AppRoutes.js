@@ -71,9 +71,10 @@ const AppRoutes = () => {
             path="admin/signupAdmin"
             element={<AuthForm name="signupAdmin" displayName="Sign Up Admin" />}
           />
-          <Route
+          {/* CHANGE IF WANT ADMIN ACESS TO THEIR CAR */}
+          {/* <Route
           path="/products"
-          element={<AllProducts />} />
+          element={<AllProducts />} /> */}
 
           <Route
           path="/admin/products"
