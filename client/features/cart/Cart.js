@@ -75,19 +75,13 @@ import { selectMe } from '../auth/authSlice';
 
 
 const Cart = () => {
-
-
-
- 
-// const products = useSelector(selectProducts);
-
 const me = useSelector(selectMe)
 const meId = me.id
 const dispatch = useDispatch()
 
 const cart = useSelector(selectCart)
  const products = cart.products
- console.log("PRODECTS: ", products)
+
 let totalMap;
  if(products && products.length){
  totalMap = products.map((product)=>{
@@ -101,12 +95,12 @@ let totalMap;
  total = totalMap.reduce((a,b)=> a + b)
  }
  
+
+//  COULD USE COUNT MAGIC METHOD
 const getNumber = (productId)=>{
   const idArray = products.filter((product)=>{
    return Number(product.id) === productId
   })
-  console.log("idarray ", idArray)
-  
   return idArray.length
 }
 

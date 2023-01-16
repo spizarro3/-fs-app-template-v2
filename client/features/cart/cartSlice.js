@@ -105,6 +105,9 @@ const cart = createSlice({
     builder.addCase(removeFromCart.fulfilled, (state, action)=>{
         return action.payload
     })
+    builder.addCase(editCartAsync.fulfilled, (state, action)=>{
+        return action.payload
+    })
    }
 })
  

@@ -26,21 +26,21 @@ router.delete("/:cartId", async (req, res, next) => {
   }
 });
 
-// router.put("/:cartId/:productId", async (req, res, next) => {
+
+
+// OLD ADD TO CART ROUTE >>> STILL GOOD
+
+// router.put("/:cartId", async (req, res, next) => {
 //   try {
 //     const cart = await Cart.findByPk(req.params.cartId);
-//     console.log("CART IM ADD TO CART ROUTE: ", cart)
-//     const product = await Product.findByPk(req.params.productId)
-//     console.log("Product IM ADD TO CART ROUTE: ", product)
-//     await cart.addProduct(product)
-    
-//     // res.send(await cart.update(req.body));
+//     res.send(await cart.addProduct(req.body.id));
 //   } catch (error) {
-//     console.log("Error 2 in update cart route");
+//     console.log("Error 1 in update cart route");
 //     next(error);
 //   }
 // });
 
+// EXPERIMENTAL ADD TO CART ROUTE
 router.put("/:cartId", async (req, res, next) => {
   try {
     const cart = await Cart.findByPk(req.params.cartId);
@@ -50,6 +50,9 @@ router.put("/:cartId", async (req, res, next) => {
     next(error);
   }
 });
+
+
+
 router.put("/remove/:cartId", async (req, res, next) => {
   try {
     const cart = await Cart.findByPk(req.body.meId);

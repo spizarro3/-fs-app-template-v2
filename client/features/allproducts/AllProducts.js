@@ -31,7 +31,9 @@ const cartId = me.id
 
     const id = product.id
   
-      dispatch(editCartAsync({cartId,  id}))
+      dispatch(editCartAsync({cartId,  id})).then(()=>{
+        dispatch(fetchProductsAsync());
+      })
       console.log("ID",id)
     };
 
