@@ -1,7 +1,7 @@
 import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { authenticate } from '../../app/store';
-import  Home  from '../home/Home';
+import LandingPage from '../landingPage/LandingPage';
 /**
   The AuthForm component can be used for Login or Sign Up.
   Props for Login: name="login", displayName="Login"
@@ -16,10 +16,7 @@ const AuthForm = ({ name, displayName }) => {
   
   const notLoggedIn = useSelector((state) => !!state.auth.me);
 
-
   const isAdmin = useSelector((state) => !!state.auth.me.isAdmin === true)
-
-
 
   const handleSubmit = (evt) => {
     evt.preventDefault();
@@ -31,7 +28,7 @@ const AuthForm = ({ name, displayName }) => {
 
   return (
     <>
-    <a className="p-4 flex justify-center -mx-3 block rounded-lg py-2 px-3 text-base font-semibold leading-7 text-gray-900 hover:bg-gray" href='/'>Home</a>  
+    {/* <a className="p-4 flex justify-center -mx-3 block rounded-lg py-2 px-3 text-base font-semibold leading-7 text-gray-900 hover:bg-gray" href='/'>Home</a>   */}
     {!isLoggedIn || (isLoggedIn && isAdmin) ? (
     <div className="w-full h-full flex justify-center">
       <form className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4" onSubmit={handleSubmit} name={name}>
@@ -52,7 +49,7 @@ const AuthForm = ({ name, displayName }) => {
         </div>
       
       </form>
-    </div> ) : <Home />}
+    </div> ) : <LandingPage />}
     </>
   );
 };
