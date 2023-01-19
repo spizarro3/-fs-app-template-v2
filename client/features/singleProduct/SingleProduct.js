@@ -32,8 +32,7 @@ const SingleProduct = () => {
     singleProduct.singleProduct;
 
   const handleAddToCart = () => {
-    // dispatch(addToCart(id));
-    
+    dispatch(addToCart(id));
     dispatch(editCartAsync({cartId, id}))
     console.log("ID",id)
   };
