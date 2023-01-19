@@ -54,15 +54,16 @@ const Cart = () => {
  
  return (
   <div id="allProducts">
-  <div>
+  <div className='p-6'>
+    <h1 className='text-5xl'>TOTAL: {total}</h1>
     <h1>Your products</h1>
-    <h1>TOTAL: {total}</h1>
       <ul className="media-list">
         {products && products.length ? 
           products.map((product) => (
-            <div>
+            <div className="grid grid-cols-1 gap-y-10 gap-x-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 xl:gap-x-8">
             <Link to={`/products/${product.id}`}>
-              <img src={product.imageUrl} />
+              <img src={product.imageUrl}
+              className="h-full w-full object-cover object-center group-hover:opacity-75" />
               <p>{product.name}</p>
               <p>${product.price}</p>
             </Link>
@@ -71,8 +72,8 @@ const Cart = () => {
             </div>
           )): ""}
       </ul>
-    </div>
     <button>Checkout</button>
+    </div>
 </div>
  )
 }

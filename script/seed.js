@@ -17,7 +17,7 @@ const seed = async () => {
       name: faker.commerce.productName(),
       price: faker.commerce.price(),
       description: faker.commerce.productDescription(),
-      imageUrl: faker.image.imageUrl(),  
+      imageUrl: `https://source.unsplash.com/random/200x200?sig=${i}`,
       quantity : Math.floor(Math.random() * 100),   
     });
   }
