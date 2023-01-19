@@ -1,7 +1,9 @@
 import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
+import { Navigate } from 'react-router-dom';
 import { authenticate } from '../../app/store';
 import LandingPage from '../landingPage/LandingPage';
+import { useNavigate } from 'react-router-dom';
 /**
   The AuthForm component can be used for Login or Sign Up.
   Props for Login: name="login", displayName="Login"
@@ -13,17 +15,19 @@ const AuthForm = ({ name, displayName }) => {
   const dispatch = useDispatch();
 
   const isLoggedIn = useSelector((state) => !!state.auth.me.id);
-  
   const notLoggedIn = useSelector((state) => !!state.auth.me);
-
   const isAdmin = useSelector((state) => !!state.auth.me.isAdmin === true)
+  
+  const navigate = useNavigate()
 
   const handleSubmit = (evt) => {
     evt.preventDefault();
     const formName = evt.target.name;
     const username = evt.target.username.value;
     const password = evt.target.password.value;
-    dispatch(authenticate({ username, password, method: formName }));
+    if (dispatch(authenticate({ username, password, method: formName }))){
+      navigate('/')
+    };
   };
 
   return (

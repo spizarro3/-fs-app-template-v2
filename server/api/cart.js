@@ -7,7 +7,6 @@ const {
 
 // All products in cart route
 router.get("/", async (req, res, next) => {
-  console.log("REQ>USER: ", req.user)
   try {
     const products = await Cart.findAll({ where: { userId: req.user.id } });
     res.send(products);

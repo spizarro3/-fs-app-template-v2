@@ -46,7 +46,6 @@ const Cart = () => {
     dispatch(getCartAsync(me.id))
   }, [dispatch] );
   
-
   const handleRemoveFromCart = (productId)=>{
     dispatch(removeFromCartAsync({productId, meId})).then(()=>{
       dispatch(getCartAsync(me.id))

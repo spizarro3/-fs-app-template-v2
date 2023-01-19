@@ -29,7 +29,8 @@ const AppRoutes = () => {
     <div>
       {isLoggedIn && !isAdmin ? (
         <Routes>
-          <Route path="/" element={<LandingPage />} />
+          <Route path="/*" element={<LandingPage />} />
+          <Route to="/home" element={<LandingPage />} />
           {/* <Route
           path="/users/:id"
           element={<SingleUser />} /> */}
