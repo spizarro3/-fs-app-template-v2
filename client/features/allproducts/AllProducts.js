@@ -7,6 +7,9 @@ import { selectMe } from "../auth/authSlice";
 import { editCartAsync } from "../cart/cartSlice";
 
 const AllProducts = () => {
+  
+  // const audio = new Audio("../../../sounds/add-to-cart.mp3");
+  
   const products = useSelector(selectProducts);
   const me = useSelector(selectMe);
   const cartId = me.id;
@@ -16,6 +19,7 @@ const AllProducts = () => {
   const handleAddToCart = (product) => {
     const id = product.id;
     dispatch(editCartAsync({ cartId, id }));
+    // audio.play();
   };
 
   useEffect(() => {
